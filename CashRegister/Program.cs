@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CashRegister   
@@ -10,9 +12,11 @@ namespace CashRegister
     class Program
     {
         private static StreamWriter receiptSave = new StreamWriter("Receipts.txt");
-        private static double grandTotal = 0;
+        
+        //private static double grandTotal = 0;
         static void Main(string[] args)
         {
+
             receiptSave.WriteLine("\nYour Receipt: \n\n");
             receiptSave.WriteLine("Item   Quantity  Price   Total\n\n");
             bool active = true;
@@ -20,6 +24,7 @@ namespace CashRegister
             {
                 try
                 {
+                    
                     Console.WriteLine("\n\t\t\t****Welcome to your online store****");
                     Console.WriteLine("\n\t\t\t\t***CASH REGISTER***");
                     Console.WriteLine("\n\t\t\t[1] New Customer");
@@ -80,7 +85,7 @@ namespace CashRegister
         {
             receiptSave.WriteLine(ReceiptPrintText(products));
             ReceiptToText();
-            grandTotal += products.TotalPrice;
+            //grandTotal += products.TotalPrice;
         }
         public static void ReceiptToText()
         {
@@ -96,7 +101,7 @@ namespace CashRegister
             {
                 Console.WriteLine(textLines);
             }
-            Console.WriteLine("\nGRAND TOTAL:                       {0:C}", grandTotal);
+            //Console.WriteLine("\nGRAND TOTAL:                       {0:C}", grandTotal);
             Console.ReadLine();
         }
         private static string ReceiptPrintText(Produces products)
