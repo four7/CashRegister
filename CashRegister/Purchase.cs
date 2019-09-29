@@ -11,9 +11,7 @@ namespace CashRegister
 {
     class Purchase
     {
-
         public static string reading = "";
-
         public static double grandTotal = 0;
         public static double Discount = (grandTotal * 0.02);
         public static double Discount2 = (grandTotal * 0.03);
