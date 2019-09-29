@@ -30,7 +30,7 @@ namespace CashRegister
                     Receipts finalSearchSplit = new Receipts();
 
                     finalSearchSplit.ProductSearchID = Int32.Parse(searchSplit[0]);
-                    
+
                     finalSearchSplit.ProductSearchReceipt = searchSplit[1];
                     finalSearchSplit.ProductSearchTotal = Int32.Parse(searchSplit[2]);
                     //finalSearchSplit.ProductID = Int32.Parse(searchSplit[3]);

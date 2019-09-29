@@ -13,38 +13,16 @@ namespace CashRegister
     {
 
         public static List<Produces> Products = new List<Produces>();
-        public void ProductChange(string productName, int productPrice)
+        public void ProducPriceChange(string productName, int productPrice)
         {
-            this.ProductName = productName;
             this.ProductPrice = productPrice;
         }
-        public static List<string> finalProducts = new List<string>();
-        public static string theProduct { get; set; }
-        public string ProductName { get; set; }
-        public int ProductID { get; set; }
-        public double ProductPrice { get; set; }
-        public int ProductAmount { get; set; }
-        public double TotalPrice { get; set; }
-        public string ProductType { get; set; }
-        public string QuantityOrder { get; set; }       //oklart om den behövs
-        
-        public int ReceiptNo = 1000;
-       
-            public void ProductMain()
+        public void ProductNameChange(string productName, int productPrice)
         {
-            this.TotalPrice = this.ProductPrice * this.ProductAmount;
+            this.ProductName = productName;
         }
-        public string Receipt()
+        public static void ProdFromText()
         {
-            this.TotalPrice = this.ProductPrice * this.ProductAmount;
-
-            string receiptMessage = String.Format("\n\n----- Item Code: {4} ----- \n{0} cost {1:C} a piece. \nSo {2} will cost you {3:C}. \nPress enter to advance", this.ProductName, this.ProductPrice, this.ProductAmount, this.TotalPrice, this.ProductID);
-
-            return receiptMessage;
-        }
-        public static void ProduceInfo()
-        {
-            string input = "";
             var readers = "..\\..\\Products.txt";
             List<string> line = File.ReadAllLines(readers).ToList();
             foreach (var reads in line)
@@ -60,56 +38,93 @@ namespace CashRegister
 
                 Products.Add(newProduct);
             }
-            
+        }
+        public static List<string> finalProducts = new List<string>();
+        public static string theProduct { get; set; }
+        public string ProductName { get; set; }
+        public int ProductID { get; set; }
+        public double ProductPrice { get; set; }
+        public int ProductAmount { get; set; }
+        public double TotalPrice { get; set; }
+        public string ProductType { get; set; }
+        public string QuantityOrder { get; set; }       //oklart om den behövs
+
+        public static int ReceiptNo = 1000;
+
+        public static void ProduceInfo()
+        {
+            ProdFromText();
+            string input = "";
             bool keepGoing = true;
             while (keepGoing)
             {
-
                 Console.Write("\n<ProductID>  <Quantity>\n");
                 string answer = Console.ReadLine();
 
-                var data = answer.Split(' ');
-                var data1 = int.Parse(data[0]);
-                var data2 = int.Parse(data[1]);
-
-
-                
-
-                foreach (var item in Products)
+                while (answer != "pay")
                 {
-                    if (item.ProductID == data1)
+                    var data = answer.Split(' ');
+                    var data1 = int.Parse(data[0]);
+                    var data2 = int.Parse(data[1]);
+
+                    foreach (var item in Products)
                     {
-                        item.TotalPrice = item.ProductPrice * data2;
                         if (item.ProductID == data1)
                         {
-                            //Console.WriteLine("{0} {1:C} * {2}{3:C}  =  {4}", item.ProductName, item.ProductPrice, data2, item.ProductType, item.TotalPrice);
-                            input = String.Format("{0} {1:C} * {2}{3:C}  =   {4:C}", item.ProductName, item.ProductPrice, data2, item.ProductType, item.TotalPrice);
-                            
-                            Purchase.grandTotal += item.TotalPrice;
-
+                            item.TotalPrice = item.ProductPrice * data2;
+                            if (item.ProductID == data1)
+                            {
+                                input = String.Format("{0} {1:C} * {2}{3:C}  =   {4:C}", item.ProductName, item.ProductPrice, data2, item.ProductType, item.TotalPrice);
+                                Purchase.grandTotal += item.TotalPrice;
+                            }
                         }
                     }
-                   
+                    finalProducts.Add(input);
+                    Console.Clear();
+                    Purchase.TextToScreen();
+                    return;
                 }
-                
-                finalProducts.Add(input);
-                Console.Clear();
-                Purchase.TextToScreen();
-<<<<<<< Updated upstream
-            }   
-=======
-                if (answer == "PAY")
+                if (answer == "pay")
                 {
                     Purchase.TextTofile();
+                    keepGoing = false;
+                    return;
                 }
-            } 
->>>>>>> Stashed changes
+            }
         }
-        public void TextOfMaths()
+        public static void ProductChanger()
         {
-            
+            ProdFromText();
+            Console.WriteLine("Press [1] to change product name. Press [2] to change product price: ");
+            int prodChangeMenu;
+            while (!int.TryParse(Console.ReadLine(), out prodChangeMenu) || prodChangeMenu < 1 || prodChangeMenu > 2)
+            {
+                Console.Write("\n\tOops, something went wrong there! Try again!" + "\n\tPlease pick a number between 1-2: ");
+            }
+            switch (prodChangeMenu)
+            {
+                case 1:
+                    Console.WriteLine("Enter a product ID to search for: ");
+                    var searchID = Convert.ToInt32(Console.ReadLine());
+
+                    foreach (var item in Products)
+                    {
+                        if (item.ProductID == searchID)
+                        {
+                            Console.WriteLine($"Product found. \nProduct: {item.ProductName}");
+                            Console.WriteLine("Enter a new product name: ");
+                            string newName = Console.ReadLine();
+                            string changedName = item.ProductName.Replace(item.ProductName, newName);
+                            //item.ProductName.Replace(item.ProductName, newName);
+                            //File.Replace("..\\..\\Products.txt", changedName);
+                        }
+                    }
+
+                    break;
+                case 2:
+                    break;
+            }
         }
+
     }
 }
-
-

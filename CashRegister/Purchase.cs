@@ -11,15 +11,18 @@ namespace CashRegister
 {
     class Purchase
     {
-<<<<<<< Updated upstream
-=======
+
         public static string reading = "";
->>>>>>> Stashed changes
+
         public static double grandTotal = 0;
-        
+        public static double Discount = (grandTotal * 0.02);
+        public static double Discount2 = (grandTotal * 0.03);
+        public static double TotalDiscount = grandTotal - Discount;
+        public static double TotalDiscount2 = grandTotal - Discount2;
+
         public static void TextToScreen()
         {
-            
+
             var dateReceipt = DateTime.Now;
 
             Console.WriteLine("\n\t\t\t\t***CASH REGISTER***");
@@ -29,32 +32,53 @@ namespace CashRegister
             TheProducts();
             Console.WriteLine("\nTOTAL:                 {0:C}", grandTotal);
             Produces.ProduceInfo();
-<<<<<<< Updated upstream
-              
-=======
-            reading = Console.ReadLine();
+
+            return;
         }
         public static void TextTofile()
         {
-            DateTime datenow = DateTime.Now;
-            datenow.ToString("yyyyMMdd");
-            string path = ($"..\\..\\Receipt_{datenow}");
+            var datenow = DateTime.Now.ToString("yyyyMMdd");
+            string path = ($"..\\..\\Receipt_{datenow}" + ".txt");
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
             if (File.Exists(path))
             {
-                File.AppendAllText(path, reading);
+                using (var receiptToFile = File.AppendText(path))
+                {
+                    receiptToFile.WriteLine(Produces.ReceiptNo);
+                    receiptToFile.WriteLine(datenow);
+                    foreach (var item in Produces.finalProducts)
+                    {
+                        receiptToFile.WriteLine(item);
+                    }
+                    if (grandTotal < 1000)
+                    {
+                        receiptToFile.WriteLine($"Total: {grandTotal}");
+                    }
+                    if (grandTotal > 1000)
+                    {
+                        receiptToFile.WriteLine($"Product total: {grandTotal}");
+                        receiptToFile.WriteLine($"Discount: {Discount}");
+                        receiptToFile.WriteLine($"Grand total: {TotalDiscount}");
+                    }
+                    if (grandTotal > 2000)
+                    {
+                        receiptToFile.WriteLine($"Product total: {grandTotal}");
+                        receiptToFile.WriteLine($"Discount: {Discount2}");
+                        receiptToFile.WriteLine($"Grand total: {TotalDiscount2}");
+                    }
+                }
             }
-            using (StreamWriter receiptToFile = new StreamWriter(path))
-            {
-                File.WriteAllText(path, reading);
-            }
->>>>>>> Stashed changes
+            return;
         }
         public static void TheProducts()
         {
             foreach (string item in Produces.finalProducts)
             {
-                Console.WriteLine(item); 
-            }       
+                Console.WriteLine(item);
+            }
         }
         public static void PurchaseMain()
         {
@@ -63,4 +87,3 @@ namespace CashRegister
         }
     }
 }
-
