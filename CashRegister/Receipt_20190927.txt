@@ -1,0 +1,40 @@
+ReceiptNo: 1001
+20190927
+Coffee $120.00 * 1kg  =   $120.00
+Bread $26.50 * 1st  =   $26.50
+Total: 173
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Total: 26.5
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Total: 26.5
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Total: 26.5
+ReceiptNo: 1002
+20190927
+Bread $26.50 * 1st  =   $26.50
+Bread $26.50 * 1st  =   $26.50
+Total: 79.5
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Potato $22.70 * 3kg  =   $68.10
+Total: 162.7
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Total: 26.5
+ReceiptNo: 1001
+20190927
+Potato $22.70 * 3kg  =   $68.10
+Bread $26.50 * 1st  =   $26.50
+Total: 121.1
+ReceiptNo: 1001
+20190927
+Bread $26.50 * 1st  =   $26.50
+Total: 26.5

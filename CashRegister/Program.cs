@@ -12,8 +12,6 @@ namespace CashRegister
     class Program
     {
         private static StreamWriter receiptSave = new StreamWriter("Receipts.txt");
-        
-        //private static double grandTotal = 0;
         static void Main(string[] args)
         {
 
@@ -24,7 +22,6 @@ namespace CashRegister
             {
                 try
                 {
-                    
                     Console.WriteLine("\n\t\t\t****Welcome to your online store****");
                     Console.WriteLine("\n\t\t\t\t***CASH REGISTER***");
                     Console.WriteLine("\n\t\t\t[1] New Customer");
@@ -45,7 +42,7 @@ namespace CashRegister
                         case 2:
                             Console.Clear();
                             Console.WriteLine("\n\t\t\t\t****ADMIN MENU****");
-                            Console.WriteLine("\n\t\t\t[1] Change Prices");
+                            Console.WriteLine("\n\t\t\t[1] Change Product Names and/or Prices");
                             Console.WriteLine("\t\t\t[2] Search Receipts");
                             Console.WriteLine("\t\t\t[3] Campaign Prices");
                             Console.WriteLine("\t\t\t[4] Return to main menu");
@@ -59,9 +56,10 @@ namespace CashRegister
                             switch (adminMenu)
                             {
                                 case 1:
-
+                                    Produces.ProductChange();
                                     break;
                                 case 2:
+                                    Receipts.ReceiptSearch();
                                     break;
                                 case 3:
                                     break;
@@ -75,43 +73,13 @@ namespace CashRegister
                 }
                 catch
                 {
+                    Produces.finalProducts.Clear();
+                    Purchase.grandTotal = 0;
                     Console.WriteLine("\tOops, something went wrong! Please Try again!!");
                     Console.WriteLine("\n\tPress Enter to continue");
                     Console.ReadLine();
                 }
             }
-        }
-        public static void RegisterRunning(Produces products)
-        {
-            receiptSave.WriteLine(ReceiptPrintText(products));
-            ReceiptToText();
-            //grandTotal += products.TotalPrice;
-        }
-        public static void ReceiptToText()
-        {
-            receiptSave.WriteLine("\n-----------------------------------------");
-            receiptSave.Close();
-
-            Console.Clear();
-
-            StreamReader readReceipt = new StreamReader("Receipts.txt");
-            string textLines = "";
-
-            while ((textLines = readReceipt.ReadLine()) != null)
-            {
-                Console.WriteLine(textLines);
-            }
-            //Console.WriteLine("\nGRAND TOTAL:                       {0:C}", grandTotal);
-            Console.ReadLine();
-        }
-        private static string ReceiptPrintText(Produces products)
-        {
-            string allUserChoices = String.Format("{0} --- {1} --- {2:C} --- {3:C}", products.ProductName, products.ProductAmount, products.ProductPrice, products.TotalPrice);
-            return allUserChoices;
-        }
-        public void printReceipt(Produces products)
-        {
-            Console.WriteLine(products.Receipt());
         }
     }
 }

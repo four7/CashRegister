@@ -1,4 +1,4 @@
-﻿Potato 22.70 kg 200
-Coffee 120 kg 300
+Potato 22.70 kg 200
+Salmon 120 kg 300
 Bread 26.50 st 400
 Milk 9 st 500
