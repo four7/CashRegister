@@ -58,6 +58,7 @@
     </Content>
     <Content Include="Receipt_20190927.txt" />
     <Content Include="Receipt_20190928.txt" />
+    <Content Include="Receipt_20190929.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

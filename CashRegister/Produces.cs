@@ -74,6 +74,7 @@ namespace CashRegister
 
 
                 
+
                 foreach (var item in Products)
                 {
                     if (item.ProductID == data1)
@@ -94,7 +95,15 @@ namespace CashRegister
                 finalProducts.Add(input);
                 Console.Clear();
                 Purchase.TextToScreen();
+<<<<<<< Updated upstream
             }   
+=======
+                if (answer == "PAY")
+                {
+                    Purchase.TextTofile();
+                }
+            } 
+>>>>>>> Stashed changes
         }
         public void TextOfMaths()
         {

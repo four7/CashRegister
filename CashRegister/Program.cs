@@ -56,7 +56,7 @@ namespace CashRegister
                             switch (adminMenu)
                             {
                                 case 1:
-                                    Produces.ProductChange();
+                                    Produces.ProductChanger();
                                     break;
                                 case 2:
                                     Receipts.ReceiptSearch();
